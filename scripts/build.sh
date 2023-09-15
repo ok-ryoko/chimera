@@ -7,10 +7,10 @@ set -o errexit
 set -o nounset
 
 usage() {
-	printf 'usage: %s [-a ARCHITECTURE] [-r REPOSITORY] VERSION\n' "$0"
+	printf 'usage: %s [-a ARCHITECTURE] [-h] [-k] [-r REPOSITORY] VERSION\n' "$0"
 }
 
-while getopts a:hr: opt; do
+while getopts a:hkr: opt; do
 	case "${opt}" in
 		a)
 			arch="${OPTARG}"
@@ -18,6 +18,9 @@ while getopts a:hr: opt; do
 		h)
 			usage
 			exit 0
+			;;
+		k)
+			keep='1'
 			;;
 		r)
 			repository="${OPTARG}"
@@ -29,6 +32,8 @@ while getopts a:hr: opt; do
 	esac
 done
 shift $((OPTIND-1))
+
+readonly keep="${keep:-0}"
 
 readonly chimera_version="${1:?$(usage && exit 2)}"
 readonly url_base='https://repo.chimera-linux.org/live/latest'
@@ -52,7 +57,7 @@ ctr="$(buildah from scratch)"
 
 # shellcheck disable=SC2317
 defer() {
-	if [ "${ctr}" ]; then
+	if [ "${keep}" = '0' ]; then
 		buildah rm "${ctr}" >'/dev/null'
 	fi
 }
