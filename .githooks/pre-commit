@@ -1,0 +1,48 @@
+#!/bin/sh -
+#
+# Copyright 2023 OK Ryoko
+# SPDX-License-Identifier: BSD-2-Clause
+
+set -o errexit
+set -o nounset
+
+# filter prints the lines in a sequence that match a pattern.
+#
+# Parameters:
+#   $1: pattern, a regular expression string
+#   $2: lines, a string consisting of newline-separated items
+#
+filter() {
+	pattern="$1"; lines="$2"
+	printf '%s\n' "$(
+		echo "${lines}" | { grep -e "${pattern}" || test $? = 1; }
+	)"
+}
+
+# Handle the case where there are no commits in the local repository
+#
+if git rev-parse --verify 'HEAD' >'/dev/null' 2>&1; then
+    against='HEAD'
+else
+    against="$(git hash-object -t 'tree' '/dev/null')"
+fi
+readonly against
+
+# Capture the relative path to every file in the index
+#
+changed_files="$(git diff --name-only --staged "${against}")"
+if [ -z "${changed_files}" ]; then
+    exit 0
+fi
+readonly changed_files
+
+# Lint all changed shell scripts as POSIX shell scripts
+#
+readonly script_pattern='^\.githooks/.*$\|^scripts/.*\.sh$'
+shell_scripts="$(filter "${script_pattern}" "${changed_files}")"
+if [ "${shell_scripts}" ]; then
+	# shellcheck disable=SC2086
+	shellcheck --shell=sh ${shell_scripts}
+fi
+
+exit 0
