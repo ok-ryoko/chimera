@@ -68,13 +68,13 @@ readonly url_base='https://repo.chimera-linux.org/live/latest'
 
 mkdir -p dist
 cd dist
-curl --remote-name --silent "${url_base}/sha256sums.txt"
+curl --remote-name --show-error --silent "${url_base}/sha256sums.txt"
 
 readonly arch="${arch:-"$(uname --machine)"}"
 readonly tar_file="chimera-linux-${arch}-ROOTFS-${chimera_version}-bootstrap.tar.gz"
 
 if ! [ -f "${tar_file}" ]; then
-	curl --remote-name --silent "${url_base}/${tar_file}"
+	curl --remote-name --show-error --silent "${url_base}/${tar_file}"
 fi
 
 sha256sum --check --ignore-missing --status 'sha256sums.txt'
