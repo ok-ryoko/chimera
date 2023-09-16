@@ -38,7 +38,7 @@ usage() {
 	printf 'usage: %s [-a ARCHITECTURE] [-h] [-k] [-r REPOSITORY] VERSION\n' "$0"
 }
 
-while getopts a:hkr: opt; do
+while getopts 'a:hkr:' opt; do
 	case "${opt}" in
 		a)
 			arch="${OPTARG}"
