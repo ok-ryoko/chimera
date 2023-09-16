@@ -100,7 +100,7 @@ ctr="$(buildah from scratch)"
 # shellcheck disable=SC2317
 defer() {
 	if [ "${keep}" = '0' ]; then
-		buildah rm "${ctr}" >'/dev/null'
+		buildah rm "${ctr}" > '/dev/null'
 	fi
 }
 trap defer EXIT
