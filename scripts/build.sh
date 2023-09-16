@@ -2,6 +2,34 @@
 #
 # Copyright 2023 OK Ryoko
 # SPDX-License-Identifier: BSD-2-Clause
+#
+# SYNOPSIS:
+#
+#   ./build.sh [-a ARCH] [-h] [-k] [-r REPO] VERSION
+#
+# DESCRIPTION:
+#
+#   Create a Chimera Linux container image in local storage, printing the ID of
+#   the new image to standard output
+#
+# OPTIONS:
+#
+#   -a ARCH Use the provided architecture instead of the automatically detected
+#           architecture. Supported values are aarch64, ppc64, ppc64le, riscv64
+#           and x86_64.
+#
+#   -h      Print synopsis to standard output and exit
+#
+#   -k      Keep the working container
+#
+#   -r REPO Use this repository name instead of the default (localhost/chimera)
+#
+# NOTES:
+#
+#   Depends on curl and Buildah to run successfully
+#
+#   Creates a directory named 'dist' in the working directory in which download
+#   artifacts will be stored for future runs
 
 set -o errexit
 set -o nounset
