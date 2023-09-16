@@ -67,15 +67,16 @@ while getopts 'a:hkr:u' opt; do
 done
 shift $((OPTIND-1))
 
-readonly keep="${keep:-0}"
-readonly update="${update:-0}"
-
 readonly chimera_version="${1:?$(usage && exit 2)}"
-readonly url_base='https://repo.chimera-linux.org/live/latest'
+readonly arch="${arch:-"$(uname --machine)"}"
+readonly keep="${keep:-0}"
+readonly repository="${repository:-localhost/chimera}"
+readonly update="${update:-0}"
 
 mkdir -p dist
 cd dist
 
+readonly url_base='https://repo.chimera-linux.org/live/latest'
 readonly checksums='sha256sums.txt'
 
 if ! [ -f "${checksums}" ] || [ "${update}" = '1' ]; then
@@ -84,7 +85,6 @@ if ! [ -f "${checksums}" ] || [ "${update}" = '1' ]; then
 	mv --force "${checksums}-" "${checksums}"
 fi
 
-readonly arch="${arch:-"$(uname --machine)"}"
 readonly tar_file="chimera-linux-${arch}-ROOTFS-${chimera_version}-bootstrap.tar.gz"
 
 if ! [ -f "${tar_file}" ]; then
@@ -107,7 +107,6 @@ trap defer EXIT
 
 buildah add --quiet "${ctr}" "${tar_file}" '/'
 
-readonly repository="${repository:-localhost/chimera}"
 readonly ref="${repository}:${chimera_version}-${arch}"
 
 readonly label_url='https://chimera-linux.org/'
