@@ -24,9 +24,12 @@
 #
 #   -r REPO Use this repository name instead of the default (localhost/chimera)
 #
+#   -u      Fetch the rootfs tarball checksums unconditionally
+#
 # NOTES:
 #
-#   Depends on curl and Buildah to run successfully
+#   Requires an Internet connection and depends on the availability of the curl
+#   and Buildah programs
 #
 #   Creates a directory named 'dist' in the working directory in which download
 #   artifacts will be stored for future runs
@@ -35,10 +38,10 @@ set -o errexit
 set -o nounset
 
 usage() {
-	printf 'usage: %s [-a ARCHITECTURE] [-h] [-k] [-r REPOSITORY] VERSION\n' "$0"
+	printf 'usage: %s [-a ARCHITECTURE] [-h] [-k] [-r REPOSITORY] [-u] VERSION\n' "$0"
 }
 
-while getopts 'a:hkr:' opt; do
+while getopts 'a:hkr:u' opt; do
 	case "${opt}" in
 		a)
 			arch="${OPTARG}"
@@ -53,6 +56,9 @@ while getopts 'a:hkr:' opt; do
 		r)
 			repository="${OPTARG}"
 			;;
+		u)
+			update='1'
+			;;
 		?)
 			usage
 			exit 2
@@ -62,13 +68,21 @@ done
 shift $((OPTIND-1))
 
 readonly keep="${keep:-0}"
+readonly update="${update:-0}"
 
 readonly chimera_version="${1:?$(usage && exit 2)}"
 readonly url_base='https://repo.chimera-linux.org/live/latest'
 
 mkdir -p dist
 cd dist
-curl --remote-name --show-error --silent "${url_base}/sha256sums.txt"
+
+readonly checksums='sha256sums.txt'
+
+if ! [ -f "${checksums}" ] || [ "${update}" = '1' ]; then
+	curl --show-error --silent "${url_base}/${checksums}" | grep 'bootstrap' >> "${checksums}"
+	sort --key=2 --unique "${checksums}" > "${checksums}-"
+	mv --force "${checksums}-" "${checksums}"
+fi
 
 readonly arch="${arch:-"$(uname --machine)"}"
 readonly tar_file="chimera-linux-${arch}-ROOTFS-${chimera_version}-bootstrap.tar.gz"
@@ -77,7 +91,7 @@ if ! [ -f "${tar_file}" ]; then
 	curl --remote-name --show-error --silent "${url_base}/${tar_file}"
 fi
 
-sha256sum --check --ignore-missing --status 'sha256sums.txt'
+sha256sum --check --ignore-missing --status "${checksums}"
 
 export BUILDAH_FORMAT='oci'
 
