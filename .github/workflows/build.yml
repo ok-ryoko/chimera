@@ -1,0 +1,31 @@
+name: build
+on:
+  workflow_dispatch:
+
+permissions:
+  packages: write
+
+env:
+  CHIMERA_VERSION: 20230915
+
+jobs:
+  build:
+    runs-on:
+      - ubuntu-22.04
+
+    steps:
+      - name: Install latest Buildah version
+        run: apt --quiet update && apt --quiet --yes install buildah
+
+      - name: Checkout last commit on branch main
+        uses: actions/checkout@v3
+
+      - name: Login to container registry
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ghcr.io/${{ github.repository_owner }}
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push Chimera Linux container images
+        run: ./scripts/release.sh "${CHIMERA_VERSION}"
