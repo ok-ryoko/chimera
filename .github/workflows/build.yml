@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Install latest Buildah version
-        run: apt --quiet update && apt --quiet --yes install buildah
+        run: sudo apt --quiet update && sudo apt --quiet --yes install buildah
 
       - name: Checkout last commit on branch main
         uses: actions/checkout@v3
