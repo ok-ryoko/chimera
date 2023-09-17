@@ -54,12 +54,11 @@ shift $((OPTIND-1))
 
 readonly chimera_version="${1:?$(usage && exit 2)}"
 readonly domain='ghcr.io'
-readonly path='ok-ryoko/chimera'
+readonly namespace='ok-ryoko'
+readonly path="${namespace}/chimera"
 readonly repository="${domain}/${path}"
 
-if ! buildah login --get-login "${domain}" 2> '/dev/null' 1>&2; then
-	error "not logged into container registry ${domain}"
-fi
+buildah login --get-login "${domain}/${namespace}" > '/dev/null'
 
 readonly manifest="${repository}:${chimera_version}"
 readonly manifest_latest="${repository}:latest"
