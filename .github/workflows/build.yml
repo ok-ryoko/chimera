@@ -14,9 +14,6 @@ jobs:
       - ubuntu-22.04
 
     steps:
-      - name: Install latest Buildah version
-        run: sudo apt --quiet update && sudo apt --quiet --yes install buildah
-
       - name: Checkout last commit on branch main
         uses: actions/checkout@v3
 

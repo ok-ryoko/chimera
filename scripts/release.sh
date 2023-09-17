@@ -39,11 +39,6 @@ usage() {
 	printf 'usage: %s [-h] VERSION\n' "$0"
 }
 
-error() {
-	printf '%s: error: %s\n' "$0" "$1"
-	exit 1
-}
-
 while getopts 'h' opt; do
 	case "${opt}" in
 		h) usage && exit 0 ;;
@@ -62,13 +57,6 @@ buildah login --get-login "${domain}/${namespace}" > '/dev/null'
 
 readonly manifest="${repository}:${chimera_version}"
 readonly manifest_latest="${repository}:latest"
-
-for m in "${manifest}" "${manifest_latest}"; do
-	if buildah manifest exists "${m}"; then
-		error "manifest ${m} already exists"
-	fi
-done
-unset -v m
 
 export BUILDAH_FORMAT='oci'
 
