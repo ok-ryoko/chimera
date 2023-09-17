@@ -109,6 +109,7 @@ buildah add --quiet "${ctr}" "${tar_file}" '/'
 
 readonly ref="${repository}:${chimera_version}-${arch}"
 
+readonly label_documentation='https://chimera-linux.org/docs/'
 readonly label_url='https://chimera-linux.org/'
 readonly label_title='Chimera Linux Base Container'
 readonly label_description="Image containing a bootstrapped environment for containers based on Chimera Linux ${chimera_version}"
@@ -119,6 +120,7 @@ buildah config \
 	--cmd '/bin/sh' \
 	--label "org.opencontainers.image.created=$(date --rfc-3339=ns --utc)" \
 	--label "org.opencontainers.image.url=${label_url}" \
+	--label "org.opencontainers.image.documentation=${label_documentation}" \
 	--label "org.opencontainers.image.version=${chimera_version}" \
 	--label "org.opencontainers.image.ref.name=${ref}" \
 	--label "org.opencontainers.image.title=${label_title}" \
