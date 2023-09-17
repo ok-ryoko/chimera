@@ -1,0 +1,30 @@
+name: ci-shell
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.githooks/*'
+      - 'scripts/*.sh'
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.githooks/*'
+      - 'scripts/*.sh'
+
+jobs:
+  check:
+    runs-on:
+      - ubuntu-22.04
+
+    steps:
+      - name: Checkout last commit on branch main
+        uses: actions/checkout@v3
+
+      - name: Print ShellCheck version
+        run: shellcheck --version
+
+      - name: Lint all shell scripts against the POSIX.2 specification
+        run: shellcheck --shell=sh .githooks/* scripts/*.sh
