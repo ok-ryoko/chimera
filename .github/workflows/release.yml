@@ -1,4 +1,4 @@
-name: build
+name: release
 on:
   workflow_dispatch:
 
@@ -9,7 +9,7 @@ env:
   CHIMERA_VERSION: 20230915
 
 jobs:
-  build:
+  release:
     runs-on:
       - ubuntu-22.04
 

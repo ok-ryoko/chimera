@@ -15,7 +15,7 @@ on:
       - 'scripts/*.sh'
 
 jobs:
-  check:
+  lint:
     runs-on:
       - ubuntu-22.04
 
