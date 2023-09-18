@@ -58,7 +58,7 @@ buildah login --get-login "${domain}/${namespace}" > '/dev/null'
 readonly url_base='https://repo.chimera-linux.org/live/latest'
 readonly checksums='sha256sums.txt'
 
-curl --show-error --silent "${url_base}/${checksums}" | grep 'bootstrap' >> "${checksums}"
+curl --show-error --silent "${url_base}/${checksums}" | grep 'bootstrap' > "${checksums}"
 
 readonly manifest="${repository}:${chimera_version}"
 readonly manifest_latest="${repository}:latest"
