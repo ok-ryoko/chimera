@@ -15,8 +15,8 @@ podman run --rm "${img}" lsb_release --all
 LSB Version:	1.0
 Distributor ID:	Chimera
 Description:	Chimera Linux
-Release:	    rolling
-Codename:	    chimera
+Release:	rolling
+Codename:	chimera
 ```
 
 If you have [GNU Make], [curl] and [Buildah], then you can also build container images locally for yourself. Running
@@ -31,7 +31,9 @@ make build
 
 ## Trust statement
 
-The [build] and [release] scripts in this repository trust the domain *repo.chimera-linux.org* as well as the artifacts listed at *https://repo.chimera-linux.org/live/latest*. The [release wrapper script], which assembles and pushes image indexes to *ghcr.io/ok-ryoko/chimera*, also trusts the domain *quay.io* and the images at *quay.io/containers/buildah*.
+The [build] and [release] scripts in this repository trust the domain *repo.chimera-linux.org* as well as the artifacts listed at *https://repo.chimera-linux.org/live/latest*.
+
+The [release wrapper script], which assembles and pushes image indexes to *ghcr.io/ok-ryoko/chimera*, also trusts the domain *quay.io* and the images at *quay.io/containers/buildah*.
 
 ## License
 
