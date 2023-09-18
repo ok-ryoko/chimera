@@ -23,7 +23,7 @@
 #   - Authentication to ghcr.io/ok-ryoko
 #   - Authorization to write packages to ghcr.io/ok-ryoko
 #   - curl
-#   - Buildah v1.23
+#   - Buildah v1.30.0
 #
 # NOTES:
 #

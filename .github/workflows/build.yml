@@ -25,4 +25,4 @@ jobs:
           password: ${{ github.token }}
 
       - name: Build and push Chimera Linux container images
-        run: ./scripts/release.sh "${CHIMERA_VERSION}"
+        run: sudo ./scripts/release_wrapper.sh "${CHIMERA_VERSION}"
