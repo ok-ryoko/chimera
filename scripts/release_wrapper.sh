@@ -9,13 +9,15 @@
 #
 # DESCRIPTION:
 #
-#   Run a Buildah build script for Chimera Linux container images inside a
-#   container containing Buildah, forwarding registry credentials
+#   Run a script for building and pushing Chimera Linux container images in a
+#   container containing Buildah
 #
 # REQUIREMENTS:
 #
-#   - Privileges to build containers inside a container
+#   - Elevated privileges so that we can build images inside a container
 #   - Valid authentication file at $XDG_RUNTIME_DIR/containers/auth.json
+#   - AppArmor v3.0.4
+#   - Valid AppArmor profile for containerized Buildah (included)
 #   - Podman v3.4.4
 #   - Buildah v1.23.1
 #   - Working Internet connection
@@ -23,8 +25,8 @@
 #
 # NOTES:
 #
-#   Intended to be run only in a trusted continuous integration environment for
-#   which recent versions of Buildah aren't generally available
+#   Intended to be run only in a trusted Ubuntu 22.04 LTS continuous integration
+#   environment for which recent versions of Buildah are not generally available
 
 set -o errexit
 set -o nounset
@@ -42,6 +44,8 @@ done
 shift $((OPTIND-1))
 
 readonly chimera_version="${1:?$(usage && exit 2)}"
+
+apparmor_parser --replace './apparmor/buildah-containerized'
 
 readonly storage="/var/lib/containers-tmp"
 mkdir -p "${storage}"
@@ -69,7 +73,7 @@ readonly img
 
 podman run \
 	--env "REGISTRY_AUTH_FILE=/run/secrets/${secret}" \
-	--privileged \
+	--security-opt 'apparmor=buildah-containerized' \
 	--secret "${secret}" \
 	--volume "${storage}:/var/lib/containers" \
 	"${img}" \

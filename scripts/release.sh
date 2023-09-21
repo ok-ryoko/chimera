@@ -83,7 +83,7 @@ for arch in $arches; do
 	tar_file="chimera-linux-${arch}-ROOTFS-${chimera_version}-bootstrap.tar.gz"
 	curl --remote-name --show-error --silent "${url_base}/${tar_file}"
 	sha256sum --check --ignore-missing --status "${checksums}"
-	ctr="$(buildah from scratch)"
+	ctr="$(buildah from --isolation='chroot' scratch)"
 	buildah add --quiet "${ctr}" "${tar_file}" '/'
 	buildah config \
 		--annotation='-' \
