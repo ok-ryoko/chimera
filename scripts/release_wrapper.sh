@@ -72,6 +72,7 @@ img="$(buildah commit --squash "${ctr}")"
 readonly img
 
 podman run \
+	--device '/dev/fuse' \
 	--env "REGISTRY_AUTH_FILE=/run/secrets/${secret}" \
 	--security-opt 'apparmor=buildah-containerized' \
 	--secret "${secret}" \
