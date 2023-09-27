@@ -76,7 +76,7 @@ readonly update="${update:-0}"
 mkdir -p 'dist'
 cd 'dist'
 
-readonly url_base='https://repo.chimera-linux.org/live/latest'
+readonly url_base="https://repo.chimera-linux.org/live/${chimera_version}"
 readonly checksums='sha256sums.txt'
 
 if ! [ -f "${checksums}" ] || [ "${update}" = '1' ]; then

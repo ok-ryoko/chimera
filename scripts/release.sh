@@ -55,7 +55,7 @@ readonly repository="${domain}/${path}"
 
 buildah login --get-login "${domain}/${namespace}" > '/dev/null'
 
-readonly url_base='https://repo.chimera-linux.org/live/latest'
+readonly url_base="https://repo.chimera-linux.org/live/${chimera_version}"
 readonly checksums='sha256sums.txt'
 
 curl --show-error --silent "${url_base}/${checksums}" | grep 'bootstrap' > "${checksums}"
