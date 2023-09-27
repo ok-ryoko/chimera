@@ -47,7 +47,7 @@ readonly chimera_version="${1:?$(usage && exit 2)}"
 
 apparmor_parser --replace './apparmor/buildah-containerized'
 
-readonly storage="/var/lib/containers-tmp"
+readonly storage='/var/lib/containers-tmp'
 mkdir -p "${storage}"
 
 readonly secret='authfile'

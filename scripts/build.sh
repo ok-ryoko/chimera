@@ -73,8 +73,8 @@ readonly keep="${keep:-0}"
 readonly repository="${repository:-localhost/chimera}"
 readonly update="${update:-0}"
 
-mkdir -p dist
-cd dist
+mkdir -p 'dist'
+cd 'dist'
 
 readonly url_base='https://repo.chimera-linux.org/live/latest'
 readonly checksums='sha256sums.txt'
