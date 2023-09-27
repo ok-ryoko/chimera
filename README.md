@@ -1,10 +1,12 @@
 # Chimera Linux OCI Container Images
 
-This repository provides **unofficial** [OCI] container images for [Chimera Linux] built from the official bootstrap rootfs tarballs. It also provides POSIX shell scripts for building said images using [Buildah] and [Podman] both locally and on GitHub.
+This repository provides **unofficial** [OCI] container images for [Chimera Linux] built from the official bootstrap rootfs tarballs. It also provides POSIX shell scripts for building said images using [Buildah] and [Podman] both locally and using [GitHub Actions].
 
 ## Usage
 
-If you trust the owner of this repository as well as the [release workflow definition], then you can pull the latest image using your favorite container management tool:
+### Pulling and running a pre-built container image
+
+> Please read the [trust statement](#trust-statement) before proceeding.
 
 ```sh
 img="$(podman pull --quiet 'ghcr.io/ok-ryoko/chimera:latest')"
@@ -18,6 +20,8 @@ Description:	Chimera Linux
 Release:	rolling
 Codename:	chimera
 ```
+
+### Building your own container images
 
 If you have [make], [curl] and [Buildah] installed, then you can also build container images locally for yourself. Running
 
@@ -43,15 +47,23 @@ The [build] and [release] scripts in this repository trust the domain *repo.chim
 
 The [release wrapper script], which assembles and pushes image indexes to *ghcr.io/ok-ryoko/chimera*, also trusts the domain *quay.io* and the images at *quay.io/containers/buildah*. This trust is needed to leverage a more recent version of Buildah than that available in the [GitHub-hosted Ubuntu 22.04 LTS runner].
 
+Therefore, you should pull the images at *ghcr.io/ok-ryoko/chimera* only if you trust:
+
+- the owner of this repository;
+- the [release workflow definition];
+- GitHub’s CI infrastructure, and
+- the domains *repo.chimera-linux.org*, *quay.io* and *ghcr.io*.
+
 ## License
 
-This project is free and open source software licensed under the [BSD 2-Clause “Simplified” License][license].
+The contents of this repository comprise free and open source software licensed under the [BSD 2-Clause “Simplified” License][license].
 
 [build]: ./scripts/build.sh
 [Buildah]: https://buildah.io/
 [Chimera Linux]: https://chimera-linux.org/
 [curl]: https://curl.se/
 [ghcr.io/ok-ryoko/chimera]: https://github.com/ok-ryoko/chimera/pkgs/container/chimera
+[GitHub Actions]: https://github.com/features/actions
 [GitHub-hosted Ubuntu 22.04 LTS runner]: https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
 [license]: ./LICENSE
 [make]: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html
