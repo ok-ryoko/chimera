@@ -43,9 +43,7 @@ Container images are built and pushed to *[ghcr.io/ok-ryoko/chimera]* using the 
 
 ## Trust statement
 
-The [build] and [release] scripts in this repository trust the domain *repo.chimera-linux.org* as well as the artifacts listed at *https://repo.chimera-linux.org/live/latest*.
-
-The [release wrapper script], which assembles and pushes image indexes to *ghcr.io/ok-ryoko/chimera*, also trusts the domain *quay.io* and the images at *quay.io/containers/buildah*. This trust is needed to leverage a more recent version of Buildah than that available in the [GitHub-hosted Ubuntu 22.04 LTS runner].
+The [build] and [release] scripts in this repository trust the domain *repo.chimera-linux.org*. The [release wrapper script], which assembles and pushes image indexes to *ghcr.io/ok-ryoko/chimera*, also trusts the domain *quay.io* and the images at *quay.io/containers/buildah*. This trust is needed to leverage a more recent version of Buildah than that available in the [GitHub-hosted Ubuntu 22.04 LTS runner].
 
 Therefore, you should pull the images at *ghcr.io/ok-ryoko/chimera* only if you trust:
 
