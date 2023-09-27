@@ -45,7 +45,8 @@ shift $((OPTIND-1))
 
 readonly chimera_version="${1:?$(usage && exit 2)}"
 
-apparmor_parser --replace './apparmor/buildah-containerized'
+readonly apparmor_profile='buildah-containerized'
+apparmor_parser --replace "./apparmor/${apparmor_profile}"
 
 readonly storage='/var/lib/containers-tmp'
 mkdir -p "${storage}"
@@ -74,7 +75,7 @@ readonly img
 podman run \
 	--device '/dev/fuse' \
 	--env "REGISTRY_AUTH_FILE=/run/secrets/${secret}" \
-	--security-opt 'apparmor=buildah-containerized' \
+	--security-opt "apparmor=${apparmor_profile}" \
 	--secret "${secret}" \
 	--volume "${storage}:/var/lib/containers" \
 	"${img}" \
