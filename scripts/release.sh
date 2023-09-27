@@ -72,8 +72,8 @@ readonly label_authors='OK Ryoko <ryoko@kyomu.jp.net>'
 readonly label_url='https://chimera-linux.org/'
 readonly label_documentation='https://chimera-linux.org/docs/'
 readonly label_source="https://github.com/${path}"
-readonly label_title='Chimera Linux Base Container'
-readonly label_description="Image containing a bootstrapped environment for containers based on Chimera Linux ${chimera_version}"
+readonly label_title='Unofficial Chimera Linux Base Container'
+readonly label_description="Unofficial image containing a bootstrapped environment for containers based on Chimera Linux ${chimera_version}"
 
 readonly arches='aarch64 ppc64 ppc64le riscv64 x86_64'
 # shellcheck disable=SC2086
