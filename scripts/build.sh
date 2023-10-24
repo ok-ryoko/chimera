@@ -68,7 +68,7 @@ done
 shift $((OPTIND-1))
 
 readonly chimera_version="${1:?$(usage && exit 2)}"
-readonly arch="${arch:-"$(uname --machine)"}"
+readonly arch="${arch:-"$(uname -m)"}"
 readonly keep="${keep:-0}"
 readonly repository="${repository:-localhost/chimera}"
 readonly update="${update:-0}"
@@ -81,8 +81,8 @@ readonly checksums='sha256sums.txt'
 
 if ! [ -f "${checksums}" ] || [ "${update}" = '1' ]; then
 	curl --show-error --silent "${url_base}/${checksums}" | grep 'bootstrap' >> "${checksums}"
-	sort --key=2 --unique "${checksums}" > "${checksums}-"
-	mv --force "${checksums}-" "${checksums}"
+	sort -k 2 -u "${checksums}" > "${checksums}-"
+	mv -f "${checksums}-" "${checksums}"
 fi
 
 readonly tar_file="chimera-linux-${arch}-ROOTFS-${chimera_version}-bootstrap.tar.gz"

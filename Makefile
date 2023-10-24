@@ -23,8 +23,8 @@ lint:
 
 .PHONY: clean #? Remove all Chimera Linux build artifacts
 clean:
-	rm --force --recursive dist
+	rm -fr dist
 
 .PHONY: help #? Describe all targets documented in the Makefile
 help:
-	@awk --posix --exec scripts/make_help.awk Makefile
+	@awk -f scripts/make_help.awk Makefile
