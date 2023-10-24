@@ -79,16 +79,16 @@ cd 'dist'
 readonly url_base="https://repo.chimera-linux.org/live/${chimera_version}"
 readonly checksums='sha256sums.txt'
 
-if ! [ -f "${checksums}" ] || ! [ -f "${tar_file}" ] || [ "${update}" = '1' ]; then
+if ! [ -f "${checksums}" ] || ! [ -f "${tarball}" ] || [ "${update}" = '1' ]; then
 	curl --show-error --silent "${url_base}/${checksums}" | grep 'bootstrap' >> "${checksums}"
 	sort -k 2 -u "${checksums}" > "${checksums}-"
 	mv -f "${checksums}-" "${checksums}"
 fi
 
-readonly tar_file="chimera-linux-${arch}-ROOTFS-${chimera_version}-bootstrap.tar.gz"
+readonly tarball="chimera-linux-${arch}-ROOTFS-${chimera_version}-bootstrap.tar.gz"
 
-if ! [ -f "${tar_file}" ]; then
-	curl --remote-name --show-error --silent "${url_base}/${tar_file}"
+if ! [ -f "${tarball}" ]; then
+	curl --remote-name --show-error --silent "${url_base}/${tarball}"
 fi
 
 sha256sum --check --ignore-missing --status "${checksums}"
@@ -105,7 +105,7 @@ defer() {
 }
 trap defer EXIT
 
-buildah add --quiet "${ctr}" "${tar_file}" '/'
+buildah add --quiet "${ctr}" "${tarball}" '/'
 
 readonly ref="${repository}:${chimera_version}-${arch}"
 
