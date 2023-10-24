@@ -79,7 +79,7 @@ cd 'dist'
 readonly url_base="https://repo.chimera-linux.org/live/${chimera_version}"
 readonly checksums='sha256sums.txt'
 
-if ! [ -f "${checksums}" ] || [ "${update}" = '1' ]; then
+if ! [ -f "${checksums}" ] || ! [ -f "${tar_file}" ] || [ "${update}" = '1' ]; then
 	curl --show-error --silent "${url_base}/${checksums}" | grep 'bootstrap' >> "${checksums}"
 	sort -k 2 -u "${checksums}" > "${checksums}-"
 	mv -f "${checksums}-" "${checksums}"
