@@ -37,6 +37,10 @@ make build
 ./scripts/build.sh '20230915'
 ```
 
+## Why?
+
+These container images may be useful (1) to persons experienced with GNU coreutils wanting to get a taste of a BSD userland, and (2) for running and isolating simple POSIX shell scripts that invoke Chimera Linux utilities on a GNU/Linux host.
+
 ## Release policy and schedule
 
 Container images are built and pushed to *[ghcr.io/ok-ryoko/chimera]* using the GitHub Actions workflow titled `release`. The owner of this repository triggers this workflow manually when (1) they learn that a new set of Chimera Linux build artifacts has been published or (2) one of the release scripts has changed in a way that affects the contents or integrity of the container images.
