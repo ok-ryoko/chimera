@@ -27,4 +27,4 @@ clean:
 
 .PHONY: help #? Describe all targets documented in the Makefile
 help:
-	@awk -f scripts/make_help.awk Makefile
+	@awk -f scripts/make_help.awk GNUmakefile
