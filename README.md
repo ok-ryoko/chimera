@@ -23,7 +23,7 @@ Codename:	chimera
 
 ### Building your own container images
 
-If you have [make], [curl] and [Buildah] installed, then you can also build container images locally for yourself. Running
+If you have [GNU Make], [curl] and [Buildah] installed, then you can also build container images locally for yourself. Running
 
 ```sh
 git clone 'https://github.com/ok-ryoko/chimera'
@@ -31,7 +31,7 @@ cd chimera
 make build
 ```
 
-… should by default create an image in the repository *localhost/chimera* for your machine’s architecture. Alternatively, you can skip make and run the [build] script directly, e.g.,
+… should by default create an image in the repository *localhost/chimera* for your machine’s architecture. Alternatively, you can skip GNU Make and run the [build] script directly, e.g.,
 
 ```sh
 ./scripts/build.sh '20230915'
@@ -68,7 +68,7 @@ The contents of this repository comprise free and open source software licensed 
 [GitHub Actions]: https://github.com/features/actions
 [GitHub-hosted Ubuntu 22.04 LTS runner]: https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
 [license]: ./LICENSE
-[make]: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html
+[GNU Make]: https://www.gnu.org/software/make/
 [OCI]: https://opencontainers.org/
 [Podman]: https://podman.io/
 [release workflow definition]: ./.github/workflows/release.yml
