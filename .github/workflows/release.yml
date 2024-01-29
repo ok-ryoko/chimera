@@ -6,7 +6,7 @@ permissions:
   packages: write
 
 env:
-  CHIMERA_VERSION: 20231227
+  CHIMERA_VERSION: 20240122
 
 jobs:
   release:

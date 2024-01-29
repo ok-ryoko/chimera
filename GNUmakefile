@@ -7,7 +7,7 @@ SHELL := /bin/sh
 .DEFAULT_GOAL := help
 .SUFFIXES:
 
-VERSION := 20231227
+VERSION := 20240122
 
 .PHONY: setup #? Prepare the development environment
 setup:
