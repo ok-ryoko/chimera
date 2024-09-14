@@ -21,5 +21,5 @@ If you have a GitHub account, then please use this repository’s [private vulne
 [contact]: mailto:ryoko@kyomu.jp.net
 [ghcr.io/ok-ryoko/chimera]: https://github.com/ok-ryoko/chimera/pkgs/container/chimera
 [private vulnerability reporting]: https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability
-[shell scripts]: https://github.com/ok-ryoko/chimera/tree/main/scripts
 [release workflow definition]: https://github.com/ok-ryoko/chimera/blob/main/.github/workflows/release.yml
+[shell scripts]: https://github.com/ok-ryoko/chimera/tree/main/scripts

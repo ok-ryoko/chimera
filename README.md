@@ -1,11 +1,15 @@
 # Chimera Linux OCI Container Images
 
+> [!IMPORTANT]
+> Official OCI container images have been available on Docker Hub since December 2023 at [chimeralinux/chimera]. This repository has served its purpose and is no longer maintained.
+
 This repository provides **unofficial** [OCI] container images for [Chimera Linux] built from the official bootstrap rootfs tarballs. It also provides POSIX shell scripts for building said images using [Buildah] and [Podman] both locally and using [GitHub Actions].
 
 ## Usage
 
 ### Pulling and running a pre-built container image
 
+> [!NOTE]
 > Please read the [trust statement](#trust-statement) before proceeding.
 
 ```sh
@@ -63,12 +67,13 @@ The contents of this repository comprise free and open source software licensed 
 [build]: ./scripts/build.sh
 [Buildah]: https://buildah.io/
 [Chimera Linux]: https://chimera-linux.org/
+[chimeralinux/chimera]: https://hub.docker.com/r/chimeralinux/chimera
 [curl]: https://curl.se/
 [ghcr.io/ok-ryoko/chimera]: https://github.com/ok-ryoko/chimera/pkgs/container/chimera
 [GitHub Actions]: https://github.com/features/actions
 [GitHub-hosted Ubuntu 22.04 LTS runner]: https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
-[license]: ./LICENSE
 [GNU Make]: https://www.gnu.org/software/make/
+[license]: ./LICENSE
 [OCI]: https://opencontainers.org/
 [Podman]: https://podman.io/
 [release workflow definition]: ./.github/workflows/release.yml
